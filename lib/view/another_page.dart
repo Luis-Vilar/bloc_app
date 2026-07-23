@@ -1,24 +1,23 @@
+import 'package:bloc_app/bloc/counter_bloc.dart';
+import 'package:bloc_app/bloc/counter_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:bloc_app/bloc/counter_bloc.dart';
-import 'package:bloc_app/bloc/counter_event.dart';
-
-class CounterPage extends StatelessWidget {
-  const CounterPage({super.key});
+class AnotherPage extends StatelessWidget {
+  const AnotherPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Contador',
+          'Otra Pagina',
           style: TextStyle(fontSize: 36, fontWeight: .w700),
         ),
         actions: [
           IconButton(
-            onPressed: () => Navigator.popAndPushNamed(context, '/another'),
-            icon: Icon(Icons.navigate_next),
+            onPressed: () => Navigator.popAndPushNamed(context, '/'),
+            icon: Icon(Icons.navigate_before),
           ),
         ],
       ),
