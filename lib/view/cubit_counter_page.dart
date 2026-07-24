@@ -1,32 +1,32 @@
+import 'package:bloc_app/cubit/counter_cubit.dart';
+import 'package:bloc_app/cubit/counter_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:bloc_app/bloc/counter_bloc.dart';
-import 'package:bloc_app/bloc/counter_event.dart';
-
-class CounterPage extends StatelessWidget {
-  const CounterPage({super.key});
+class CounterCubicPage extends StatelessWidget {
+  const CounterCubicPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CounterCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Contador',
+          'Cubic Counter',
           style: TextStyle(fontSize: 36, fontWeight: .w700),
         ),
         actions: [
           IconButton(
-            onPressed: () => Navigator.popAndPushNamed(context, '/another'),
-            icon: Icon(Icons.navigate_next),
+            onPressed: () => Navigator.popAndPushNamed(context, '/'),
+            icon: Icon(Icons.navigate_before),
           ),
         ],
       ),
       body: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
+        child: BlocBuilder<CounterCubit, CounterState>(
+          builder: (context, state) {
             return Text(
-              count.toString(),
+              '${state.count}',
               style: const TextStyle(fontSize: 48.0, fontWeight: .w700),
             );
           },
@@ -37,15 +37,13 @@ class CounterPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             heroTag: 'fab-increment',
-            onPressed: () =>
-                context.read<CounterBloc>().add(CounterIncremented()),
+            onPressed: cubit.increment,
             child: const Icon(Icons.add),
           ),
           SizedBox(height: 12),
           FloatingActionButton(
             heroTag: 'fab-decrement',
-            onPressed: () =>
-                context.read<CounterBloc>().add(CounterDecremented()),
+            onPressed: cubit.decrement,
             child: const Icon(Icons.remove),
           ),
         ],
