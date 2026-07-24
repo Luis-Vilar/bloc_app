@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_app/bloc/counter_bloc.dart';
 import 'package:bloc_app/bloc/counter_event.dart';
+import 'package:bloc_app/bloc/counter_state.dart';
 
 class CounterBlocPage extends StatelessWidget {
   const CounterBlocPage({super.key});
@@ -23,10 +24,10 @@ class CounterBlocPage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
+        child: BlocBuilder<CounterBloc, CounterState>(
+          builder: (context, state) {
             return Text(
-              count.toString(),
+              state.count.toString(),
               style: const TextStyle(fontSize: 48.0, fontWeight: .w700),
             );
           },
@@ -38,14 +39,14 @@ class CounterBlocPage extends StatelessWidget {
           FloatingActionButton(
             heroTag: 'fab-increment',
             onPressed: () =>
-                context.read<CounterBloc>().add(CounterIncremented()),
+                context.read<CounterBloc>().add(CounterIncrementedEvent()),
             child: const Icon(Icons.add),
           ),
           SizedBox(height: 12),
           FloatingActionButton(
             heroTag: 'fab-decrement',
             onPressed: () =>
-                context.read<CounterBloc>().add(CounterDecremented()),
+                context.read<CounterBloc>().add(CounterDecrementedEvent()),
             child: const Icon(Icons.remove),
           ),
         ],
