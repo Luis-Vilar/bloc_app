@@ -1,5 +1,4 @@
 import 'package:bloc_app/cubit/counter_cubit.dart';
-import 'package:bloc_app/cubit/counter_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,10 +22,11 @@ class CounterCubicPage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: BlocBuilder<CounterCubit, CounterState>(
+        child: BlocBuilder<CounterCubit, int>(
+          bloc: cubit,
           builder: (context, state) {
             return Text(
-              '${state.count}',
+              '$state',
               style: const TextStyle(fontSize: 48.0, fontWeight: .w700),
             );
           },
